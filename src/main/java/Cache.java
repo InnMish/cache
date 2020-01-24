@@ -11,7 +11,6 @@ public class Cache {
     private long timeToLive;
     private long checkTime;
     private ConcurrentHashMap<String, Wrapper> cache = new ConcurrentHashMap<>();
-    TimeUnit timeUnit;
 
     Cache(long timeToLive, long checkTime, TimeUnit timeUnit) {
         setTimeToLive(timeToLive, timeUnit);
@@ -23,8 +22,8 @@ public class Cache {
         return timeToLive;
     }
 
-    public void setCheckTime(long checkTime) {
-        if (checkTime <= 30) {
+    private void setCheckTime(long checkTime) {
+        if (checkTime < 30) {
             throw new RuntimeException("checkTime parameter must not be less than 30");
         }
         this.checkTime = checkTime;
@@ -32,7 +31,7 @@ public class Cache {
 
     void setTimeToLive(long timeToLive, TimeUnit type) {
         if (timeToLive <= 0 || type == null) {
-            throw new RuntimeException("timeToLive parameter must be bigger than 0");
+            throw new RuntimeException("timeToLive parameter must be bigger than 0 and type must not be null");
         }
         this.timeToLive = type.toMillis(timeToLive);
     }
