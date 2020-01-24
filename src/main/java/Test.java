@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class Test {
     public static void main(String[] args) throws InterruptedException {
 
-        Cache cache = new Cache(10000, 2000); //check time in milliseconds
+        Cache cache = new Cache(10000, 2000, TimeUnit.MILLISECONDS); //check time in milliseconds
 
         cache.put("1", "First Object");
         cache.put("2", "Second Object");
